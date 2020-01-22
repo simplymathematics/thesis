@@ -1645,7 +1645,7 @@ summary {
 <h2>Introduction</h2>
 <p>Predictive policing is already a policy that is fully in place. The Compas Algorithm<span class="citation">(Yong 2018)</span> is used to predict recidivism in arrested individuals and has had questionable efficacy <span class="citation">(Dressel and Farid 2018)</span>. The Brookings Institute <span class="citation">(Turner-Lee, Resnick, and Barton 2019)</span> has outlined many cases in which racism and sexism were unintentionally built in to models through several means, including labeling bias, sampling bias, and even the composition of the teams in involved. Amazon’s Rekognition <span class="citation">(“Amazon Rekognition Video and Image - AWS” 2019)</span> platform active pursuit of a contract with Immigration and Customs Enforcement. In the Summer of 2019, a teen was falsely arrested and sued Apple for it’s alleged use of facial recognition technology <span class="citation">(Liao 2019)</span>, escalating this technology to Minority-Report levels of use, without corresponding checks on its efficacy or bias. Finding the relationship between data, models, and racial bias is critically important in 2019. In particular, it is necessary to measure various techniques used in the wild (OpenCV, Keras), see if they carry the bias discussed in “Predictive Analytics in Object Detection” <span class="citation">(2019a)</span></p>
 <p>Methods to mitigate bias:</p>
-<p>The “Partnership on AI” has written a “Report on Algorithmic Risk Assessment Tools in the Criminal Justice System” that broke down the ways in which models can carry human bias <span class="citation">(“Report on Algorithmic Risk Assessment Tools in the U.S. Criminal Justice System - The Partnership on AI” 2019)</span>:</p>
+<p>The “Partnership on AI” has written a “Report on Algorithmic Risk Assessment Tools in the Criminal Justice System” that broke down the ways in which models can carry human bias:</p>
 <ol style="list-style-type: decimal">
 <li><p>Equal opportunity failures: equal false positive/negative rates across protected classes like race and gender. For the case of human detection algorithms, false negatives are the priority since we don’t want cars to hit dark-skinned people. For facial-recognition systems, we could aim for class parity across false-positive rates so that all classes are misidentified equally. However, that means that each class will have a distinct accuracy score (often measured by f1 score, or a combined metric of both false positive and false negative rates).</p></li>
 <li><p>Predictive parity: The second method optimizes for parity across f1 scores for various classes. This is known as calibration within groups. This will, as explained above, lead to differences in the model’s failure rate when isolated to the metrics discussed above.</p></li>
@@ -1917,17 +1917,6 @@ z = \frac{x-u}{\sigma}
 <p>.00025 for the FERET datase, .0441 for the LFW dataset, and .75 for the Fairface set.</p>
 <p>If we let <span class="math inline">\(\alpha = .10 \text{ or alpha} = .05\)</span>, then we can reject the first null hypothesis. There is sufficient evidence to suggest that accuracy varies by race for many models. Notably, this does not apply to the Fairface data since it was constructed to be diverse, adding further evidence to the claim. Furthermore, this is evidence in favor of the third alternate hypothesis that more diverse data leads to better results.</p>
 <p>The second hypothesis hinges on the assumption that the luminance value of an image will correlate strongly with the accuracy value (i.e. that more light leads to better results). By calculating the correlation of the f1-scores and luminance values across our data, we find that there is a weak correlation between luminance and accuracy rates (p-value = <span class="math inline">\(.2 * 10^-16\)</span>). However, while that correlation is positive, it is weak, with a confidence interval of .21 to .35.</p>
-<pre><code>## 
-##  Pearson's product-moment correlation
-## 
-## data:  X1 and y1
-## t = 7.3068, df = 614, p-value = 8.542e-13
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  0.2085000 0.3539279
-## sample estimates:
-##       cor 
-## 0.2828386</code></pre>
 <div id="sampling-methods" class="section level3">
 <h3>Sampling Methods</h3>
 <p>In the final section, various sampling techniques were tested: simple random sampling, simple random sampling with replacement, and balanced sampling (that draws equal numbers from each class). However, non-random sampling only served to increase the racial-performance gap relative to the simple random sample.</p>
@@ -1941,12 +1930,11 @@ z = \frac{x-u}{\sigma}
 </div>
 <div id="further-work" class="section level1">
 <h1>Further Work</h1>
-<p>Further work is needed</p>
+<p>Further work is needed to thouroughly investigate the causal relationships between sample size, class size, and class variance relative to the mean of the population with respect to racial distribution in both the sample and the population. There was a strict time and cost limitation on the research, but further research would be easy because of the self-contained tooling required for this paper. In particular, a dedicated GPU cluster would help with learning as well as testing hundreds or thousands of different partitions of the training sets. Furthermore, if we controlled for things like gender, perceived race, the presence of facial hair or glasses, and other such topics that vary across sets, then we could develop more confidence that the racial bias we find is due to sample selection alone. However, we are left with weak evidence of how to mititgate the bias that is clearly present when constructing models from certain data sets.</p>
 <div style="page-break-after: always;"></div>
 </div>
-<div id="sources" class="section level1">
+<div id="sources" class="section level1 unnumbered">
 <h1>Sources:</h1>
-<p><a href="http://www.face-rec.org/algorithms/">Various Linear Techniques</a> have been shown to be quite effective.</p>
 <div id="refs" class="references">
 <div id="ref-otsu">
 <p>“3.3.9.7. Otsu thresholding — Scipy lecture notes.” 2019. <a href="https://scipy-lectures.org/packages/scikit-image/auto_examples/plot_threshold.html">https://scipy-lectures.org/packages/scikit-image/auto_examples/plot_threshold.html</a>.</p>
